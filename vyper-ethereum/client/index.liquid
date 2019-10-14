@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All || Nothing Crowd Funding</title>
+  <link rel="stylesheet" href="./public/bulma.min.css">
+  <script src="./public/web3.min.js"></script>
+  <script src="./public/jquery.min.js"></script>
+  <script src="./public/frontend.js"></script>
+</head>
+
+<body>
+  <section class="section">
+    <div class="container">
+  
+  <div class="level">
+  <div class="level-left"></div>
+  <div class="level-right">
+  <div class="level-item">
+  <a class="button is-link" href="/add">Add New Project</a>
+  </div>
+  </div>
+  </div>
+  
+  {% for project in projects%}
+
+          <article class="tile is-child box notification is-info">
+            <p class="title">{{project.title}}</p>
+            <p class="subtitle">{{project.desc}}</p>
+            <div class="content">
+              {% assign progress = project.currentAmount | times : 100 | divided_by : project.goalAmount %}
+              {% if project.currentState == 'Fundraising' %}
+              <p>Raised Funds : {{ progress }}%</p>
+              <progress class="progress" value="{{progress}}" max="100">{{progress}}%</progress>
+              {% endif %}
+              <p>Deadline : {{ project.deadline }}</p>
+              <p>State : {{ project.currentState }}</p>
+              {% if project.currentState == 'Fundraising' %}
+                <form method="POST">
+                  <div class="field is-horizontal">
+                    <div class="field-label is-normal">
+                      <label class="label">Amount</label>
+                    </div>
+                    <div class="field-body">
+                      <div class="field">
+                        <p class="control is-expanded">
+                          <input class="input" type="number" name="amount" min="0" step="any">
+                        </p>
+                      </div>
+                      <div class="field">
+                        <div class="control">
+                        <button type="submit" class="button is-link">Donate</button>
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  <input type="hidden" name="donor" class="donorAddress">
+                  <input type="hidden" name="project" value="{{project.id}}">
+                </form>
+              {% endif %}
+            </div>
+          </article>
+          <br>
+          
+    {% endfor %}
+
+
+    </div>
+  </section>
+</body>
+
+</html>
