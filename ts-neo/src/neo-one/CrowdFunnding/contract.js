@@ -1,4 +1,4 @@
-/* @hash 84a6596dc82565205d593d49ed9ea044 */
+/* @hash a3372b64691c59ef16a96e7a6b5ac7d7 */
 // tslint:disable
 /* eslint-disable */
 import { crowdFunndingABI } from './abi';
@@ -7,7 +7,7 @@ import { sourceMaps } from '../sourceMaps';
 const definition = {
   networks: {
     local: {
-      address: 'AQbbhXeXhKeQpNCBhaHo4x8Ve2yEvbdJcH',
+      address: 'AUc3uuCNCNjGV3atF8WwQxKXMnb89b368v',
     },
   },
   abi: crowdFunndingABI,
