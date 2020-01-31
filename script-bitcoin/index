@@ -1,0 +1,106 @@
+pseudocode for creating transaction
+
+projectGoal = 1000 satoshis
+
+---------------------------------------------------------
+1st backer creates pledge 
+
+Transaction 1
+
+signed using SIGHASH_ANYONECANPAY
+---------------------------------------------------------
+
+{
+  "version": 1,
+  "inputs": [
+    {
+     Transaction with amount 500 satoshis
+    }
+  ],
+  "outputs": [
+    {
+      "value": 100,
+      "script": [
+        "OP_DUP",
+        "OP_HASH160",
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", // signature that project owner can calculate
+        "OP_EQUALVERIFY",
+        "OP_CHECKSIG"
+      ]
+    }
+  ],
+  "lockTime": 0
+}
+
+-- Don't broadccast -- invalid transaction as output amount 1000 is greater than input 500
+
+
+---------------------------------------------------------
+2nd backer creates pledge 
+
+Transaction 2
+
+signed using SIGHASH_ANYONECANPAY
+---------------------------------------------------------
+
+{
+  "version": 1,
+  "inputs": [
+    {
+     Transaction with amount 500 satoshis
+    }
+  ],
+  "outputs": [
+    {
+      "value": 100,
+      "script": [
+        "OP_DUP",
+        "OP_HASH160",
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", // signature that project owner can calculate
+        "OP_EQUALVERIFY",
+        "OP_CHECKSIG"
+      ]
+    }
+  ],
+  "lockTime": 0
+}
+
+-- Don't broadccast -- invalid transaction as output amount 1000 is greater than input 500
+
+---------------------------------------------------------
+Project Owner creates new Transaction
+
+Transaction 3
+
+Valid because of SIGHASH_ANYONECANPAY
+---------------------------------------------------------
+{
+  "version": 1,
+  "inputs": [
+    {
+     Transaction 1,
+     Transaction 2
+    }
+  ],
+  "outputs": [
+    {
+      "value": 100,
+      "script": [
+        "OP_DUP",
+        "OP_HASH160",
+        "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", // signature that project owner can calculate
+        "OP_EQUALVERIFY",
+        "OP_CHECKSIG"
+      ]
+    }
+  ],
+  "lockTime": 0
+}
+
+-- Valid Transaction and can be claimed by Project Owner. To do so, following Script code gets executed.
+
+"OP_DUP",
+"OP_HASH160",
+"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+"OP_EQUALVERIFY",
+"OP_CHECKSIG"
